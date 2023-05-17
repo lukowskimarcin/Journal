@@ -1,0 +1,79 @@
+===============================================================
+BACKEND
+===============================================================
+1. Kafka + przyklad producera i konsumera, serializacja po JSON => przyklad pod komunikacje asynchroniczna 
+2. Usluga do skanowania rynku w cyklu (SSE dla UI)
+    https://www.google.com/amp/s/turkogluc.com/server-sent-events-with-spring-boot-and-reactjs/amp/
+4. Podpiecie KAFKI jako dostawcy wiadomosci dla backend
+    - https://www.javaguides.net/2022/07/event-driven-microservices-using-spring-boot-and-apache-kafka.html
+    - https://piotrminkowski.com/2022/01/24/distributed-transactions-in-microservices-with-kafka-streams-and-spring-boot/
+    - https://betterprogramming.pub/kafka-with-java-spring-and-docker-asynchronous-communication-between-microservices-e1d00e120831
+=> 5. Test skutecznosci rozpoznania formacji..
+13. money-managment-service
+    - ksiegowy dla danego konta, dane do wykresow prezentujace stan finansowy konta....
+14. Rejestr strategii
+15. Poczatek implementacji strategii SIMPLE_CANDLE
+17. Simple Strategy:
+    we: time na sygnal -> rozpoczecie nowego interwalu
+        interwal: np. M15
+        rynek do sprawdzenia
+    mm: ocena jaki wolumen, i czy mozna wykonac, zapisany % jaki moge zaryzykowac
+    wy: dane do utworzenia ticketu: typ, wolumen, SL 
+
+
+===============================================================
+UI
+===============================================================
+3. SSE  dla React
+    https://www.google.com/amp/s/turkogluc.com/server-sent-events-with-spring-boot-and-reactjs/amp/
+    https://medium.com/tokopedia-engineering/implementing-server-sent-events-in-reactjs-c36661d89468
+    https://roytuts.com/server-sent-events-spring-push-notifications/    
+4. Usluga prubkujaca skanujaca rynki....    
+5. Wykresy swieczek.....
+6. Dane z Investing.com, przefiltowane na rynki w których mam pozycje/strategie
+7. PWA:
+    https://pwa-workshop.js.org/#requirements
+
+===============================================================
+OTHER
+===============================================================
+VPS:
+    https://www.ovhcloud.com/pl/vps/
+SSL:
+    https://www.mariokandut.com/how-to-setup-https-ssl-in-localhost-react/
+
+
+
+============================================
+AXON + Kafka
+
+https://docs.axoniq.io/reference-guide/extensions/kafka    
+
+axon-kafka-spring-boot-starter
+
+https://www.baeldung.com/spring-boot-keycloak
+
+
+
+============================================
+                KONTEKSTY
+============================================
+
+- Strategia rejestr:
+    simple, [EURUSD, JPYUSD, .... GBPUSD], H1, numer konta, maksymalna strata dzienna, 
+    simple, [EURUSD, JPYUSD, .... GBPUSD], M15, numer konta
+
+- Dane konta handlowego
+
+- Simple Strategy: realizacja strategii
+
+- Money managment 
+    - jaka pozycja
+    - czy juz nie za duza strata
+
+
+=============================
+- mija okres np. H1
+- szukana jest strategia, która monitoruje H1
+- 
+

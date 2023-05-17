@@ -1,0 +1,43 @@
+# FLOW 
+# sprawdzenie na poczatek interwalu czy jest zatwierdzona jakas formacja (to lepsze)
+GET http://localhost:8080/api/v1/candlestick/check_patterns_from_pos/DJI30/H4
+###
+GET http://localhost:8080/api/v1/candlestick/check_patterns_from/DJI30/H4/1675353600
+
+# pobranie danych candlestick od danego miejsca do analizy
+###
+GET http://localhost:8080/api/v1/candlestick/data_from/DJI30/H4/1675353600/5
+
+
+
+#===============================================
+# CANDLESTICK
+#===============================================
+###
+
+GET http://localhost:8080/api/v1/candlestick/data_from_pos/D40EUR/M15/20
+
+###
+
+GET http://localhost:8080/api/v1/candlestick/data_from/D40EUR/M15/1674549900/5
+
+###
+
+GET http://localhost:8080/api/v1/candlestick/check_patterns_from_pos/DJI30/H1
+
+###
+
+GET http://localhost:8080/api/v1/candlestick/check_patterns_from/DJI30/M15/1675349100
+
+###
+
+GET http://localhost:8080/api/v1/candlestick/scan_patterns_from/DJI30/H4/1674540000/to/1675360800
+
+ 
+
+#===============================================
+# MT5
+#===============================================
+###
+
+GET http://localhost:8080/api/v1/mt5/copy_rates_from_pos/DJI30/H1/10

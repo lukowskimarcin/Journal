@@ -1,0 +1,4 @@
+###
+
+GET http://localhost:5080/api/v1/mt5/copy_rates_from_pos/DJI30/H1/20
+

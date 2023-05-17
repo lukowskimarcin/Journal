@@ -1,0 +1,67 @@
+{"properties": [
+  {
+    "name": "candlestick.pattern.scan-size",
+    "type": "java.lang.String",
+    "description": "A description for 'candlestick.pattern.scan-size'"
+  },
+  {
+    "name": "candlestick.pattern.trap-scan",
+    "type": "java.lang.String",
+    "description": "A description for 'candlestick.pattern.trap-scan'"
+  },
+  {
+    "name": "indicator.importance-scan-size",
+    "type": "java.lang.String",
+    "description": "A description for 'indicator.importance-scan-size'"
+  },
+  {
+    "name": "indicator.rsi-scan-size",
+    "type": "java.lang.String",
+    "description": "A description for 'indicator.rsi-scan-size'"
+  },
+  {
+    "name": "candlestick.pattern.max-shadow-percent",
+    "type": "java.lang.String",
+    "description": "A description for 'candlestick.pattern.max-shadow-percent'"
+  },
+  {
+    "name": "candlestick.pattern.hammer.max-stem",
+    "type": "java.lang.String",
+    "description": "A description for 'candlestick.pattern.hammer.max-stem'"
+  },
+  {
+    "name": "candlestick.pattern.hammer.exception-stem",
+    "type": "java.lang.String",
+    "description": "A description for 'candlestick.pattern.hammer.exception-stem'"
+  },
+  {
+    "name": "candlestick.pattern.morning-star.maxMiddleCandlePercent",
+    "type": "java.lang.String",
+    "description": "A description for 'candlestick.pattern.morning-star.maxMiddleCandlePercent'"
+  },
+  {
+    "name": "candlestick.pattern.evening-star.maxMiddleCandlePercent",
+    "type": "java.lang.String",
+    "description": "A description for 'candlestick.pattern.evening-star.maxMiddleCandlePercent'"
+  },
+  {
+    "name": "candlestick.pattern.falling-star.max-stem",
+    "type": "java.lang.String",
+    "description": "A description for 'candlestick.pattern.falling-star.max-stem'"
+  },
+  {
+    "name": "candlestick.pattern.falling-star.exception-stem",
+    "type": "java.lang.String",
+    "description": "A description for 'candlestick.pattern.falling-star.exception-stem'"
+  },
+  {
+    "name": "candlestick.pattern.morning-star.max-middle-candle-percent",
+    "type": "java.lang.String",
+    "description": "A description for 'candlestick.pattern.morning-star.max-middle-candle-percent'"
+  },
+  {
+    "name": "candlestick.pattern.evening-star.max-middle-candle-percent",
+    "type": "java.lang.String",
+    "description": "A description for 'candlestick.pattern.evening-star.max-middle-candle-percent'"
+  }
+]}

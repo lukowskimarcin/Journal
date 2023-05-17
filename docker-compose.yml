@@ -1,0 +1,213 @@
+version: "3.9"
+services:
+  zookeeper:
+    image: zookeeper
+    container_name: zookeeper
+    #restart: "no"
+    ports:
+      - 2181:2181
+
+  
+  kafka:
+    image: obsidiandynamics/kafka
+    container_name: kafka
+    restart: "no"
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: DOCKER_INTERNAL:PLAINTEXT,DOCKER_EXTERNAL:PLAINTEXT
+      KAFKA_LISTENERS: DOCKER_INTERNAL://:29092,DOCKER_EXTERNAL://:9092
+      KAFKA_ADVERTISED_LISTENERS: DOCKER_INTERNAL://kafka:29092,DOCKER_EXTERNAL://${DOCKER_HOST_IP:-127.0.0.1}:9092
+      KAFKA_INTER_BROKER_LISTENER_NAME: DOCKER_INTERNAL
+      KAFKA_ZOOKEEPER_CONNECT: "zookeeper:2181"
+      KAFKA_BROKER_ID: 1
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    depends_on:
+      - zookeeper
+
+
+  kafdrop:
+    image: obsidiandynamics/kafdrop
+    container_name: kafdrop
+    restart: "no"
+    ports:
+      - 9000:9000
+    environment:
+      KAFKA_BROKERCONNECT: "kafka:29092"
+      JVM_OPTS: "-Xms32M -Xmx64M"
+    depends_on:
+      - kafka
+
+
+  jenkins:
+    image: jenkins/jenkins:lts
+    restart: unless-stopped
+    privileged: true
+    user: root
+    ports:
+      - 5888:8080
+      - 50000:50000
+    container_name: jenkins
+    volumes:
+      - jenkins-data:/var/jenkins_home
+
+
+  keycloak-db:
+    image: postgres:15
+    restart: unless-stopped
+    volumes:
+      - keycloak-data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_DB: keycloak
+      POSTGRES_USER: keycloak
+      POSTGRES_PASSWORD: keycloak
+
+
+  keycloak:
+    depends_on:
+      - keycloak-db
+    container_name: keycloak
+    hostname: keycloak
+    image: quay.io/keycloak/keycloak:latest
+    ports:
+      - 28080:8080
+    command: start-dev
+    environment:
+      DB_VENDOR: POSTGRES
+      DB_ADDR: keycloak-db
+      DB_DATABASE: keycloak
+      DB_USER: keycloak
+      DB_SCHEMA: public
+      DB_PASSWORD: keycloak
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+
+
+  zipkin:
+    image: openzipkin/zipkin
+    container_name: zipkin
+    ports:
+      - 9411:9411
+    restart: always
+
+
+  mongodb:
+    image : mongo
+    container_name: mongodb
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME = admin
+      - MONGO_INITDB_ROOT_PASSWORD = admin
+    volumes:
+      - mongodb-data:/data/db
+    ports:
+      - 27017:27017
+    restart: unless-stopped
+
+
+  postgres-db:
+    image: postgres:15
+    restart: always
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - 5433:5432
+    environment:
+      POSTGRES_DB: journal_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+
+
+  discovery-service:
+    build:
+      context: backend/discovery-service
+      dockerfile: Dockerfile
+    container_name: discovery
+    ports:
+      - 8761:8761
+    environment:
+      - eureka.instance.hostname=discovery-service
+      - eureka.client.serviceUrl.defaultZone=http://discovery-service:8761/eureka
+
+
+  gateway-service:
+    depends_on:
+      - discovery-service
+    build:
+      context: backend/gateway-service
+      dockerfile: Dockerfile
+    mem_limit: 512m
+    ports:
+      - 8080:8080
+    environment:
+      - management.zipkin.tracing.endpoint=http://zipkin:9411/api/v2/spans
+      - eureka.client.serviceUrl.defaultZone=http://discovery-service:8761/eureka
+
+
+  journal-core-cmd:    
+    depends_on:
+      - discovery-service
+      - mongodb
+      - kafka
+    build:
+      context: backend/journal-core/journal-cmd
+      dockerfile: Dockerfile
+    ports:
+      - 8081:8081
+    environment:
+      - spring.data.mongodb.uri=mongodb://mongodb:27017/journal_db
+      - management.zipkin.tracing.endpoint=http://zipkin:9411/api/v2/spans      
+      - eureka.client.serviceUrl.defaultZone=http://discovery-service:8761/eureka
+      - spring.kafka.producer.bootstrap-servers=kafka:9092
+
+
+  journal-core-query:    
+    depends_on:
+      - discovery-service
+      - postgres-db
+      - kafka
+    build:
+      context: backend/journal-core/journal-query
+      dockerfile: Dockerfile
+    ports:
+      - 8082:8082
+    environment:
+      - spring.data.mongodb.uri=mongodb://mongodb:27017/journal_db
+      - management.zipkin.tracing.endpoint=http://zipkin:9411/api/v2/spans      
+      - eureka.client.serviceUrl.defaultZone=http://discovery-service:8761/eureka
+      - spring.kafka.consumer.bootstrap-servers=kafka:9092
+      - spring.datasource.url=jdbc:postgresql://postgres-db:5432/journal_db
+
+  candlestick-service:    
+    depends_on:
+      - discovery-service      
+    build:
+      context: backend\candlestick-service
+      dockerfile: Dockerfile
+    ports:
+      - 8083:8083
+    environment:
+      - management.zipkin.tracing.endpoint=http://zipkin:9411/api/v2/spans      
+      - eureka.client.serviceUrl.defaultZone=http://discovery-service:8761/eureka
+   
+
+  front:
+    build: 
+      context: frontend/journal-app
+      dockerfile: Dockerfile
+    ports:
+      - 3000:80
+    volumes:      
+      - /frontend/certs:/etc/nginx/certs
+
+
+volumes:
+  postgres-data:
+    driver: local    
+  mongodb-data:
+    driver: local    
+  jenkins-data:
+    driver: local    
+  keycloak-data:
+    driver: local

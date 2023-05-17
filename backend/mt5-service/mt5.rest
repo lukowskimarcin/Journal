@@ -1,0 +1,82 @@
+
+
+GET http://localhost:5080/api/v1/mt5/account_info
+
+###
+
+GET http://localhost:5080/api/v1/mt5/symbols
+
+###
+
+GET http://localhost:5080/api/v1/mt5/symbol_info/DJI30
+
+###
+
+GET http://localhost:5080/api/v1/mt5/symbol_info_tick/DJI30
+
+
+###
+# https://www.epochconverter.com/  czas epoch
+GET http://localhost:5080/api/v1/mt5/copy_rates_from/DJI30/H1/1673642800/4
+
+###
+
+GET http://localhost:5080/api/v1/mt5/copy_rates_from_pos/DJI30/H1/4
+
+###
+
+GET http://localhost:5080/api/v1/mt5/copy_rates_range/DJI30/H1/1673042400/1673226000
+
+###
+
+GET http://localhost:5080/api/v1/mt5/order_calc_margin/DJI30/BUY/0.1
+
+###
+
+GET http://localhost:5080/api/v1/mt5/order_calc_profit/DJI30/BUY/1.0/100.0/200.0
+
+###
+
+GET http://localhost:5080/api/v1/mt5/order_calc_profit/DJI30/SELL/1.0/100.0/200.0
+
+###
+#============================================
+# to sa zgloszenia wiszace jeszcze nie aktywowane
+
+GET http://localhost:5080/api/v1/mt5/orders_get
+
+###
+
+###
+GET http://localhost:5080/api/v1/mt5/orders_get/ticket/26157531
+
+#============================================
+
+###
+
+GET http://localhost:5080/api/v1/mt5/orders_total
+
+###
+#============================================
+
+GET http://localhost:5080/api/v1/mt5/positions_get
+
+###
+GET http://localhost:5080/api/v1/mt5/positions_get/symbol/DJI30
+###
+GET http://localhost:5080/api/v1/mt5/positions_get/ticket/26130968
+
+###
+#============================================
+
+GET http://localhost:5080/api/v1/mt5/positions_total
+
+
+###
+#============================================
+
+GET http://localhost:5080/api/v1/mt5/history_orders/1672531200/1673222400
+
+###
+
+GET http://localhost:5080/api/v1/mt5/history_orders/1672531200/1873222400/DJI30

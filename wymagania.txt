@@ -1,0 +1,82 @@
+1) UI cyklicznie obserwuje rynek i sprawdza czy są warunki do otworzenia pozycji
+ 
+==============================
+Strategia:
+    * warunki wejścia
+    * warunki wyjścia
+    * dobranie wielkości pozycji 
+    * prowadzenie pozycji
+    * obserwowane rynki
+    * wybrany timeframe
+
+==============================
+INSTANCJE Strategii.    
+
+
+==============================
+Money Managment:
+    * Monitorowanie tego co sie dzieje z pozycjami -> przy warunkach granicznych blokada otwierania kolejnych pozycji
+
+    * sprawdzenie czy dozwolone otwarcie pozycji 
+    * kalkulacja strat.. danego dnia
+    * maksymalny rozmiar ryzyka
+    * czestotliwość pozycji.....
+
+    -> określanie wolumenu dla nowej pozycji...
+    -> sprawdzenie czy nie jest aktywna pozycja na tą samą walutę np. EURUSD, GBPUSD 
+
+    =======
+    -> obliczenie wolumenu dla nowej pozycji przy założonym maksymalnym % ryzykowanego konta np. 5%
+    -> weryfikacja limitów:
+        * straty pod rzad 
+        * maksymalna strata dzienna
+        * limit otwartych pozycji na skorelowanym rynku np. EURUSD, GBPUSD         
+    -> informowanie o zalecanej wyplacie + jej wielkosc
+
+
+Strategia:
+    -> kiedy wejść
+    -> kiedy wyjść
+    -> prowadzenie pozycji    
+
+ 
+==============================
+1. Strategia świeczka + RSI    
+    we:
+        * RSI
+        * formacja swiecowa na skanowanym interwale
+        * czy swieca wieksza od 20 poprzednich /(11 z 20)
+        * czy nie jest już otwarta pozycja na tym rynku
+        * MM: sprawdza limity czy żaden nie przekroczony -> podaje które zostały
+        
+
+    sygnał:        
+        * dobranie wielkości wolumenu
+        * ustawienie SL i TP (2R)
+
+    prowadzenie pozycji:
+        * brak -> czekanie na wynik
+
+==============================
+2. Strategia HEDGE
+    we:
+        - określenie klastra, może być kilka
+        - sprawdzanie czy 
+
+
+==============================
+3. Strategia SCALP
+    we:
+        * wedle uznania
+    wy:
+        * wedle uznania
+
+
+
+
+
+==============================
+wieksza od 20....
+    od przynynajmniej 11 z 20 poprzednich patrze na low/high  badam swiece decyzyjna      
+
+    3straty pod rzad => alarm!!! - odpusc....

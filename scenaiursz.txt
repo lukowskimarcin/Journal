@@ -1,0 +1,38 @@
+siedze sobie w pracy i o pełnej godzinie przychodzi mi powiadomienie
+    że wykres dzoszedł do klastra i zbudował właściwą świece
+
+
+
+
+Ustawiam sobie strategie:
+
+MongoDB :) 
+
+HEADGE:
+    rynek: DJI 
+    konto: 1021359
+    timeframe: H1
+    tryb: auto/semi-auto
+
+    ZAGRANIE:    
+        Id: 1242424
+        Klaster we: [100, 115, 127]
+        kierunek: BUY
+        TP: 200
+        Aktualny wynik: +200 USD
+        Dane pozycji:
+            [
+                ticket.....
+            ]
+
+
+
+        przebieg:
+            Start:
+                orderId: 1244
+                headgeId: 1246 (stan stand by)
+            Aktywacja 1:
+                typ: 3A
+
+            Aktywacja 2:    
+                typ: 3B

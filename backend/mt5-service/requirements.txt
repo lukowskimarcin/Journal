@@ -1,0 +1,4 @@
+flask
+MetaTrader5
+py-eureka-client
+py_zipkin

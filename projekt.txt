@@ -1,0 +1,24 @@
+- sledzenie rynku i generowanie sygnalow kupna/sprzedazy
+- symulacje: testowanie zachowania w historii, aby moc robic tuning ustawien
+- profil ustawien: prod, test 
+
+- prowadzenie pozycji w oparciu o SL i Headge
+- przeglad pozycji, aby wyciagac wnioski co dziala co nie
+- statystyki pozycji
+- 
+
+
+
+================================================================================
+
+ mongodb:
+    image : mongo
+    container_name: mongodb
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME = admin
+      - MONGO_INITDB_ROOT_PASSWORD = admin
+    volumes:
+      - mongodb-data:/data/db
+    ports:
+      - 27017:27017
+    restart: unless-stopped
