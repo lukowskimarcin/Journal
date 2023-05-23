@@ -22,3 +22,9 @@
     ports:
       - 27017:27017
     restart: unless-stopped
+
+
+
+
+=========================================================================
+- jesli cien swiecy nie jest dluzszy od korpusu => to nie jest to pulapka    
